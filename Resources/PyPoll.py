@@ -75,7 +75,7 @@ total_votes = 0
 
 
 #INSERTED 
-#Declare new List: Candidate names
+#Declare new List = [Brackets] : Candidate names 
 candidate_options = []
 
 #INSERTED
@@ -83,12 +83,19 @@ candidate_options = []
 #Dictionarys have the curlyS {}
 candidate_votes = {}
 
-#INSERTED
-#Find Vote %
-#vote_percent = (votes / total_votes) * 100
+
+#DECLARE THE WINNER
+# #Decalre Variable holds empty string for winning candidate
+winning_candidate = ""
+#variable for winning count equal to zero
+winning_count = 0
+#variable for winning % equal to zero
+winning_percentage = 0
+
 
 #Open the election results and read the file
 with open(file_to_load) as election_data:
+
 
 
 #To Do read and analyize data here
@@ -133,36 +140,71 @@ with open(file_to_load) as election_data:
             candidate_votes[candidate_name] = 0
 
             #NEED to increase (increment) votes by 1 every time candidates name appears in a row
-            ###NOTE needed to align indent with IF 
+        ###NOTE needed to align indent with IF !!!!!!!
         candidate_votes[candidate_name] += 1
+
+    #Print candidate vote dictionary......This printed Candidate and Votes AT ZERO!, NEEDED line above  += 1
+    #When indedted printed entire spreadsheet/ when aligned with FOR printed candidates in one line
+    ###print(candidate_votes)
+        #OUTPUT  {'Charles Casper Stockham': 85213, 'Diana DeGette': 272892, 'Raymon Anthony Doane': 11606}
+
+    #print candidate list
+    ###print(candidate_options)
+        # OUTPUT  ['Charles Casper Stockham', 'Diana DeGette', 'Raymon Anthony Doane']
+
 
     ##Determint % of votes for each candidate by looping through the counts.
     #1. Iterate through the candidate list.
     for candidate_name in candidate_votes:
+        
         #2Retrieve vote count of a candidte.
         votes = candidate_votes[candidate_name]
+        
         #3calculate percentage of votes  
         # NOTE I removed the * 100 that was at the end of the string and put it in the  print f string
-        votes_percentage = float(votes) / float(total_votes) 
+        votes_percentage = float(votes) / float(total_votes) * 100
+        
+        #4 Print the candidate name and percent votes
+        #NOTE if indet to FOR only prints LAST "Raymon..."
+        #when indented one from FOR prints as should with all candidates and % of vote
+        ###print(f'{candidate_name}: recieved {votes_percentage}% of the vote.')
+
+        #print canidate names with percent to one decimal using :.1f with in {votes_%}   .1 is decimal  f is float
+        #print(f"{candidate_name}: {votes_percentage:.1f}% ({votes:,})\n")
 
 
-        #print candidate list
-            #print(candidate_options)
+        #Determine if votes are greater than winning count
+        if (votes > winning_count) and (votes_percentage > winning_percentage):
+            #if true set winning_count = votes and winning_percent = # Vote_percent
+            winning_count = votes
+            winning_percentage = votes_percentage
+            #set the winning cadidate = to cadidates name
+            winning_candidate = candidate_name
 
-            #Print candidate vote dictionary......This printed Candidate and Votes AT ZERO!, 
-        #print(candidate_votes)
-                #{'Charles Casper Stockham': 85213, 'Diana DeGette': 272892, 'Raymon Anthony Doane': 11606}
+        #To Do: print each canidate name, vote count, and % of votes to terminal..... 
+        print(f"{candidate_name}: {votes_percentage:.1f}% ({votes:,})\n")
 
 
-         #4 Print the candidate name and percent votes
-         # Removed * 100 from votes_percent above and added the *100:.1f to make the % one decimal.
-        print(f'{candidate_name}: recieved {votes_percentage * 100:.1f} % of the vote.')
+    #Winning canidate summary
+    winning_canidate_summery = (
+        f"______________________\n"
+        f"Winner: {winning_candidate}\n"
+        f"Winning Vote Count: {winning_count}\n"
+        f"Winning Percentage: {winning_percentage:.1f}\n"
+        f"______________________\n")
+
+    #print winner
+print(winning_canidate_summery)
+
+
+     
+
 
 #Total number of votes cast
-
+    #also the number of rows without Header row = 369,711
 
 #A complete list of candidates who received votes
-
+    #['Charles Casper Stockham', 'Diana DeGette', 'Raymon Anthony Doane']
 
 #Total number of votes each candidate received
     #{'Charles Casper Stockham': 85213, 'Diana DeGette': 272892, 'Raymon Anthony Doane': 11606}
@@ -172,6 +214,15 @@ with open(file_to_load) as election_data:
     #Diana DeGette: recieved 73.81224794501652 % of the vote.
     #Raymon Anthony Doane: recieved 3.1392087333079077 % of the vote.
 
+    #% with better decimal
+    #Charles Casper Stockham: recieved 23.0 % of the vote.
+    # Diana DeGette: recieved 73.8 % of the vote.
+    # Raymon Anthony Doane: recieved 3.1 % of the vote.
+
 #The winner of the election based on popular vote
 
-
+#______________________
+#Winner: Diana DeGette
+#Winning Vote Count: 272892
+#Winning Percentage: 73.8
+#______________________
