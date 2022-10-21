@@ -152,6 +152,20 @@ with open(file_to_load) as election_data:
     ###print(candidate_options)
         # OUTPUT  ['Charles Casper Stockham', 'Diana DeGette', 'Raymon Anthony Doane']
 
+#Save the results to our txt file. 
+with open(file_to_save, "w") as txt_file:
+
+    #After opening the file print the final vote count to the terminal
+    election_results = (
+        f'\nElection Results\n'
+        f'_______________________\n'
+        #total votes to be printed with thousands separator  :,
+        f'Total Votes; {total_votes:,}\n'
+        f'_______________________\n')
+    #print results with parameter  end="" equal to empty string. Note by defalt the endwith print a newline
+    print(election_results, end="")
+    #Save the final vote count to the txt file.
+    txt_file.write(election_results)
 
     ##Determint % of votes for each candidate by looping through the counts.
     #1. Iterate through the candidate list.
@@ -164,6 +178,10 @@ with open(file_to_load) as election_data:
         # NOTE I removed the * 100 that was at the end of the string and put it in the  print f string
         votes_percentage = float(votes) / float(total_votes) * 100
         
+        candidate_results = (
+            f"{candidate_name}: {votes_percentage:.1f}% ({votes:,})\n")
+
+
         #4 Print the candidate name and percent votes
         #NOTE if indet to FOR only prints LAST "Raymon..."
         #when indented one from FOR prints as should with all candidates and % of vote
@@ -172,21 +190,24 @@ with open(file_to_load) as election_data:
         #print canidate names with percent to one decimal using :.1f with in {votes_%}   .1 is decimal  f is float
         #print(f"{candidate_name}: {votes_percentage:.1f}% ({votes:,})\n")
 
+        print(candidate_results)
+        #save candidate results to txt file
+        txt_file.write(candidate_results)
 
         #Determine if votes are greater than winning count
         if (votes > winning_count) and (votes_percentage > winning_percentage):
             #if true set winning_count = votes and winning_percent = # Vote_percent
             winning_count = votes
-            winning_percentage = votes_percentage
             #set the winning cadidate = to cadidates name
             winning_candidate = candidate_name
+            winning_percentage = votes_percentage
+            
 
         #To Do: print each canidate name, vote count, and % of votes to terminal..... 
-        print(f"{candidate_name}: {votes_percentage:.1f}% ({votes:,})\n")
-
+        ###print(f"{candidate_name}: {votes_percentage:.1f}% ({votes:,})\n")
 
     #Winning canidate summary
-    winning_canidate_summery = (
+    winning_canidate_summary = (
         f"______________________\n"
         f"Winner: {winning_candidate}\n"
         f"Winning Vote Count: {winning_count}\n"
@@ -194,11 +215,11 @@ with open(file_to_load) as election_data:
         f"______________________\n")
 
     #print winner
-print(winning_canidate_summery)
-
+    print(winning_canidate_summary)
+    #save the winning candidate's name to the txt file
+    txt_file.write(winning_canidate_summary) 
 
      
-
 
 #Total number of votes cast
     #also the number of rows without Header row = 369,711
