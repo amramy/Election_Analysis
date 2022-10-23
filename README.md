@@ -15,9 +15,9 @@ In this analysis of the Election Results, we are looking for which counties were
 * Denver has the largest number of voters.
 
 * The candidates for this election are Charles Casper Stockham, Diana DeGette, and Raymon Anthony Doane.
-  * Charles Casper Stockham had 23% of the votes with 85,213 total votes.
-  * Diana DeGette had 73.8% of the votes with 272,892 total votes.
-  * Raymon Anthony Doane had 3.1% of the votes with 11,606 total votes.
+  * Charles Casper Stockham has 23% of the votes with 85,213 total votes.
+  * Diana DeGette has 73.8% of the votes with 272,892 total votes.
+  * Raymon Anthony Doane has 3.1% of the votes with 11,606 total votes.
 
 * Our landslide winner for this election is: Diana DeGette. Way to go Diana! 
 
